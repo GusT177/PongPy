@@ -1,58 +1,27 @@
 import pygame
-
-WIDTH = 1280
-HEIGHT = 720
-pygame.init()
-window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Pong")
-clock = pygame.time.Clock()
-running = True
+import sys
 
 
-def Player():
-    PlayerPosX = 10
-    PlayerPosY = 10
-    spd = 5
-    PlayerWidth, PlayerHeight = 50, 260
-    blue = (0,0,255)
-    PlayerRect = (PlayerPosX, PlayerPosY, PlayerWidth, PlayerHeight)
-    pygame.draw.rect(window,blue,PlayerRect)
+class Game:
 
-    key = pygame.key.get_pressed()
+    def __init__(self):
+        WIDTH = 1280
+        HEIGHT = 720
+        pygame.init()
+        self.window = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption("Pong")
+        self.clock = pygame.time.Clock()
 
-    if key[pygame.K_w]:
-        PlayerPosY += spd
-
-
-
-
-def Enemy():
-    EnemyPosX = 100
-    EnemyPosY = 100
-    EnemyWidth, EnemyHeight = 50, 260
-    red = (255,0,0)
-    EnemyRect = (EnemyPosX, EnemyPosY, EnemyWidth, EnemyHeight)
-    pygame.draw.rect(window,red,EnemyRect)
+    def run(self):
+        while True:
+            for event in pygame.event.get():
+                if event == pygame.QUIT:
+                    sys.exit()
+                    pygame.quit()
+        self.clock.tick(60)
+        self.window.fill(0, 0, 0)
+        print(self.clock.tick())
+        pygame.display.update()
 
 
-
-
-def Ball():
-    BallPos = 0
-
-
-
-while running:
-    for event in pygame.event.get():
-        if event == pygame.QUIT:
-            running = false
-            pygame.quit()
-
-    window.fill("black")
-    Player()
-    Enemy()
-    clock.tick(60)
-    pygame.display.flip()
-
-
-
+Game().run()
